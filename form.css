@@ -1,0 +1,147 @@
+/* ========== 表单样式 ========== */
+
+/* 1. 表单整体容器 */
+form {
+    background-color: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+/* 2. 每个表单项的间距 */
+form p {
+    margin-bottom: 20px;
+}
+
+/* 3. label 标签样式 */
+label {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+    color: #2c3e50;
+}
+
+/* 4. 单选/复选的 label 特殊处理（不需要加粗，和选项放在一行） */
+input[type="radio"] + label,
+input[type="checkbox"] + label {
+    font-weight: normal;
+    margin-right: 20px;
+}
+
+/* 5. 所有输入框、下拉菜单、多行文本框的通用样式 */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+}
+
+/* 6. 输入框获得焦点时的效果（用户点击输入时） */
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+/* 7. 单选按钮和复选框（保持原始大小，不要被上面的样式影响） */
+input[type="radio"],
+input[type="checkbox"] {
+    width: auto;
+    margin-right: 5px;
+    transform: scale(1.1);
+    vertical-align: middle;
+}
+
+/* 8. 文件上传按钮（稍微调整，不要撑太宽） */
+input[type="file"] {
+    padding: 8px 0;
+    border: none;
+}
+
+/* 9. 按钮样式 */
+button[type="submit"],
+button[type="reset"] {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-right: 10px;
+}
+
+/* 10. 提交按钮（绿色/蓝色主题） */
+button[type="submit"] {
+    background-color: #2c3e50;
+    color: white;
+}
+
+button[type="submit"]:hover {
+    background-color: #1a252f;
+}
+
+/* 11. 重置按钮（灰色） */
+button[type="reset"] {
+    background-color: #ecf0f1;
+    color: #7f8c8d;
+}
+
+button[type="reset"]:hover {
+    background-color: #bdc3c7;
+    color: #2c3e50;
+}
+
+/* 12. 按钮点击时的按下效果 */
+button:active {
+    transform: scale(0.98);
+}
+
+/* 13. 下拉菜单的右侧箭头（可选，让更好看） */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'></polyline></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+}
+
+/* 14. 单选框/复选框组的文字排版（让性别、爱好那组更整齐） */
+form p:has(input[type="radio"]),
+form p:has(input[type="checkbox"]) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 15. 让带 label 的单选框组内联 */
+form p:has(input[type="radio"]) label,
+form p:has(input[type="checkbox"]) label {
+    margin-right: 15px;
+    margin-bottom: 0;
+}
+
+/* 16. 响应式：手机屏幕上按钮占满宽度 */
+@media (max-width: 600px) {
+    button[type="submit"],
+    button[type="reset"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    button[type="reset"] {
+        margin-right: 0;
+    }
+}
