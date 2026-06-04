@@ -16,7 +16,7 @@
     <h1>📧 联系我</h1>
 
     <!-- 重点：action 里的邮箱换成你自己的真实邮箱 -->
-    <form action="#" method="POST">
+    <form action="https://httpbin.org/post" method="POST">
         <p style="color: gray; font-style: italic;">📢 表单功能正在建设中，暂时无法提交。如需联系我，请发送邮件到：xxx@xxx.com</p>
         
         <p>
@@ -33,6 +33,7 @@
             <label for="message">留言：</label><br>
             <textarea id="message" name="message" rows="5" cols="40" required></textarea>
         </p>
+        <input type="hidden" name="_next" value="https://lucyk1x.github.io/thanks.html">
 
         <button type="submit">发送留言</button>
 
