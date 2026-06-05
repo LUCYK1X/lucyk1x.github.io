@@ -101,3 +101,87 @@
         background: linear-gradient(to right, #f1c40f, #e74c3c);
         margin: 30px 0;
     }
+
+
+    /* 表格整体 */
+table {
+    width: 100%;
+    border-collapse: collapse;  /* 合并边框，去掉双线 */
+    margin: 20px 0;
+    font-size: 16px;
+    text-align: left;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 表头样式 */
+th {
+    background-color: #2c3e50;
+    color: white;
+    padding: 12px 15px;
+    font-weight: bold;
+}
+
+/* 普通单元格 */
+td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+/* 鼠标悬停行高亮 */
+tbody tr:hover {
+    background-color: #f5f7fa;
+}
+
+/* 交替行背景色（斑马纹） */
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* 表格标题 */
+caption {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+nav {
+    display: flex;
+    justify-content: space-between;  /* logo 在左，菜单在右 */
+    align-items: center;
+}
+.page {
+    display: grid;
+    grid-template-rows: auto 1fr auto;  /* 头部自适应，内容占满，底部自适应 */
+    min-height: 100vh;
+}
+
+header {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background-color: #ecf0f1;
+    text-align: center;
+    padding: 15px;
+}
+/* 正常模式 */
+body {
+    background-color: white;
+    color: black;
+    transition: all 0.3s;
+}
+
+/* 暗色模式 */
+body.dark {
+    background-color: #1a1a2e;
+    color: #eee;
+}
