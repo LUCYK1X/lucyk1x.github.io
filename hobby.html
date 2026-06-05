@@ -370,6 +370,17 @@
         body:not(.dark-mode) .stat-card {
             background: rgba(0,0,0,0.03);
         }
+        /* 当前页高亮 */
+nav a.active {
+    background: rgba(255,255,255,0.25);
+    color: #ffd700 !important;
+    transform: scale(1.05);
+}
+
+body:not(.dark-mode) nav a.active {
+    background: rgba(0,0,0,0.1);
+    color: #667eea !important;
+}
     </style>
 </head>
 <body>
@@ -379,7 +390,7 @@
 <div class="container">
     <nav>
         <a href="aboutme.html"><i class="fas fa-user"></i> 关于我</a>
-        <a href="hobby.html"><i class="fas fa-heart"></i> 我的爱好</a>
+        <a href="hobby.html"class="active"><i class="fas fa-heart"></i> 我的爱好</a>
         <a href="contact.html"><i class="fas fa-envelope"></i> 联系我</a>
         <a href="fruit.html"><i class="fas fa-apple-alt"></i> 水果列表</a>
         <a href="https://www.freecodecamp.org" target="_blank"><i class="fas fa-laptop-code"></i> 学习资源</a>

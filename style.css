@@ -319,3 +319,18 @@ body.dark footer {
         padding: 8px 10px;
     }
 }
+
+
+
+/* 当前页高亮 - 通用 */
+.nav-links a.active {
+    background-color: #667eea;
+    color: white;
+    border-radius: 20px;
+}
+
+/* 暗色模式下稍微微调 */
+body.dark .nav-links a.active {
+    background-color: #818cf8;
+    color: #0f172a;
+}
