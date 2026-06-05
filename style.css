@@ -169,9 +169,19 @@ main {
 }
 
 footer {
-    background-color: #ecf0f1;
     text-align: center;
-    padding: 15px;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);  /* 半透背景 */
+    backdrop-filter: blur(10px);           /* 毛玻璃效果 */
+    border-radius: 30px;
+    color: white;
+    font-weight: 500;
+}
+
+body.dark-mode footer {
+    background: rgba(0, 0, 0, 0.3);
+    color: #e2e8f0;
 }
 /* 正常模式 */
 body {
@@ -184,4 +194,13 @@ body {
 body.dark {
     background-color: #1a1a2e;
     color: #eee;
+}
+/* 暗色模式下的其他元素（卡片、链接等） */
+body.dark .card {
+    background-color: #2a2a3e;
+    color: #eee;
+}
+
+body.dark a {
+    color: #66ccff;
 }
