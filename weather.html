@@ -1,0 +1,644 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>天气查询 - 谛琼霖</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      .weather-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .weather-card {
+        background: white;
+        border-radius: 25px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        margin-top: 20px;
+      }
+      body.dark-mode .weather-card {
+        background: #2d2d44;
+        color: #e2e8f0;
+      }
+      .search-area {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .search-area input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 25px;
+        font-size: 16px;
+      }
+      .search-area button {
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+      }
+      .temp {
+        font-size: 3rem;
+        font-weight: bold;
+        margin: 20px 0;
+      }
+      .city-name {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+      .loading {
+        text-align: center;
+        padding: 40px;
+      }
+      .error {
+        color: #e74c3c;
+        text-align: center;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <nav>
+          <div class="logo">✨ 谛琼霖 | 前端之旅</div>
+          <div class="nav-links">
+            <a href="aboutme.html">🏠 关于我</a> |
+            <a href="hobby.html">🎨 我的爱好</a> |
+            <a href="contact.html">📧 联系我</a> |
+            <a href="fruit.html">🍎 水果列表</a> |
+            <a href="weather.html" class="active">🌤️ 天气查询</a> |
+            <a href="https://www.freecodecamp.org" target="_blank"
+              >📚 学习资源</a
+            >
+          </div>
+        </nav>
+      </header>
+
+      <main class="weather-container">
+        <h1>🌤️ 实时天气查询</h1>
+
+        <div class="search-area">
+          <input
+            type="text"
+            id="cityInput"
+            placeholder="输入城市名称，例如：北京、上海、London"
+            value="北京"
+          />
+          <button id="searchBtn">🔍 查询天气</button>
+        </div>
+
+        <div id="weatherResult">
+          <div class="weather-card">
+            <p>请输入城市名称查询天气～</p>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>© 2026 谛琼霖 | 数据来源：wttr.in（免费天气API）</p>
+      </footer>
+    </div>
+
+    <button id="darkModeToggle">🌙 暗色模式</button>
+
+    <script src="theme.js"></script>
+    <script>
+      // ========== 完整城市中英文映射表 ==========
+      const cityNameMap = {
+        // === 直辖市 ===
+        Beijing: "北京",
+        Shanghai: "上海",
+        Tianjin: "天津",
+        Chongqing: "重庆",
+
+        // === 黑龙江省 ===
+        Harbin: "哈尔滨",
+        Qiqihar: "齐齐哈尔",
+        Mudanjiang: "牡丹江",
+        Jiamusi: "佳木斯",
+        Daqing: "大庆",
+
+        // === 吉林省 ===
+        Changchun: "长春",
+        Jilin: "吉林",
+        Siping: "四平",
+        Liaoyuan: "辽源",
+        Tonghua: "通化",
+        Baishan: "白山",
+        Songyuan: "松原",
+        Baicheng: "白城",
+
+        // === 辽宁省 ===
+        Shenyang: "沈阳",
+        Dalian: "大连",
+        Anshan: "鞍山",
+        Fushun: "抚顺",
+        Benxi: "本溪",
+        Dandong: "丹东",
+        Jinzhou: "锦州",
+        Yingkou: "营口",
+        Fuxin: "阜新",
+        Liaoyang: "辽阳",
+        Panjin: "盘锦",
+        Tieling: "铁岭",
+        Chaoyang: "朝阳",
+        Huludao: "葫芦岛",
+
+        // === 河北省 ===
+        Shijiazhuang: "石家庄",
+        Tangshan: "唐山",
+        Qinhuangdao: "秦皇岛",
+        Handan: "邯郸",
+        Xingtai: "邢台",
+        Baoding: "保定",
+        Zhangjiakou: "张家口",
+        Chengde: "承德",
+        Cangzhou: "沧州",
+        Langfang: "廊坊",
+        Hengshui: "衡水",
+
+        // === 山东省 ===
+        Jinan: "济南",
+        Qingdao: "青岛",
+        Zibo: "淄博",
+        Zaozhuang: "枣庄",
+        Dongying: "东营",
+        Yantai: "烟台",
+        Weifang: "潍坊",
+        Jining: "济宁",
+        "Tai‘an": "泰安",
+        Weihai: "威海",
+        Rizhao: "日照",
+        Linyi: "临沂",
+        Dezhou: "德州",
+        Liaocheng: "聊城",
+        Binzhou: "滨州",
+        Heze: "菏泽",
+
+        // === 江苏省 ===
+        Nanjing: "南京",
+        Wuxi: "无锡",
+        Xuzhou: "徐州",
+        Changzhou: "常州",
+        Suzhou: "苏州",
+        Nantong: "南通",
+        Lianyungang: "连云港",
+        Huaian: "淮安",
+        Yancheng: "盐城",
+        Yangzhou: "扬州",
+        Zhenjiang: "镇江",
+        Taizhou: "泰州",
+        Suqian: "宿迁",
+
+        // === 浙江省 ===
+        Hangzhou: "杭州",
+        Ningbo: "宁波",
+        Wenzhou: "温州",
+        Jiaxing: "嘉兴",
+        Huzhou: "湖州",
+        Shaoxing: "绍兴",
+        Jinhua: "金华",
+        Quzhou: "衢州",
+        Zhoushan: "舟山",
+        Taizhou: "台州",
+        Lishui: "丽水",
+
+        // === 福建省 ===
+        Fuzhou: "福州",
+        Xiamen: "厦门",
+        Putian: "莆田",
+        Sanming: "三明",
+        Quanzhou: "泉州",
+        Zhangzhou: "漳州",
+        Nanping: "南平",
+        Longyan: "龙岩",
+        Ningde: "宁德",
+
+        // === 广东省 ===
+        Guangzhou: "广州",
+        Shenzhen: "深圳",
+        Zhuhai: "珠海",
+        Shantou: "汕头",
+        Foshan: "佛山",
+        Shaoguan: "韶关",
+        Zhanjiang: "湛江",
+        Zhaoqing: "肇庆",
+        Jiangmen: "江门",
+        Maoming: "茂名",
+        Huizhou: "惠州",
+        Meizhou: "梅州",
+        Shanwei: "汕尾",
+        Heyuan: "河源",
+        Yangjiang: "阳江",
+        Qingyuan: "清远",
+        Dongguan: "东莞",
+        Zhongshan: "中山",
+        Chaozhou: "潮州",
+        Jieyang: "揭阳",
+        Yunfu: "云浮",
+
+        // === 广西壮族自治区 ===
+        Nanning: "南宁",
+        Liuzhou: "柳州",
+        Guilin: "桂林",
+        Wuzhou: "梧州",
+        Beihai: "北海",
+        Fangchenggang: "防城港",
+        Qinzhou: "钦州",
+        Guigang: "贵港",
+        Yulin: "玉林",
+        Baise: "百色",
+        Hezhou: "贺州",
+        Hechi: "河池",
+        Laibin: "来宾",
+        Chongzuo: "崇左",
+
+        // === 海南省 ===
+        Haikou: "海口",
+        Sanya: "三亚",
+        Sansha: "三沙",
+        Danzhou: "儋州",
+
+        // === 湖南省 ===
+        Changsha: "长沙",
+        Zhuzhou: "株洲",
+        Xiangtan: "湘潭",
+        Hengyang: "衡阳",
+        Shaoyang: "邵阳",
+        Yueyang: "岳阳",
+        Changde: "常德",
+        Zhangjiajie: "张家界",
+        Yiyang: "益阳",
+        Chenzhou: "郴州",
+        Yongzhou: "永州",
+        Huaihua: "怀化",
+        Loudi: "娄底",
+
+        // === 湖北省 ===
+        Wuhan: "武汉",
+        Huangshi: "黄石",
+        Shiyan: "十堰",
+        Yichang: "宜昌",
+        Xiangyang: "襄阳",
+        Ezhou: "鄂州",
+        Jingmen: "荆门",
+        Xiaogan: "孝感",
+        Jingzhou: "荆州",
+        Huanggang: "黄冈",
+        Xianning: "咸宁",
+        Suizhou: "随州",
+
+        // === 河南省 ===
+        Zhengzhou: "郑州",
+        Kaifeng: "开封",
+        Luoyang: "洛阳",
+        Pingdingshan: "平顶山",
+        Anyang: "安阳",
+        Hebi: "鹤壁",
+        Xinxiang: "新乡",
+        Jiaozuo: "焦作",
+        Puyang: "濮阳",
+        Xuchang: "许昌",
+        Luohe: "漯河",
+        Sanmenxia: "三门峡",
+        Nanyang: "南阳",
+        Shangqiu: "商丘",
+        Xinyang: "信阳",
+        Zhoukou: "周口",
+        Zhumadian: "驻马店",
+
+        // === 江西省 ===
+        Nanchang: "南昌",
+        Jingdezhen: "景德镇",
+        Pingxiang: "萍乡",
+        Jiujiang: "九江",
+        Xinyu: "新余",
+        Yingtan: "鹰潭",
+        Ganzhou: "赣州",
+        Jian: "吉安",
+        Yichun: "宜春",
+        Shangrao: "上饶",
+
+        // === 安徽省 ===
+        Hefei: "合肥",
+        Wuhu: "芜湖",
+        Bengbu: "蚌埠",
+        Huainan: "淮南",
+        Maanshan: "马鞍山",
+        Huaibei: "淮北",
+        Tongling: "铜陵",
+        Anqing: "安庆",
+        Huangshan: "黄山",
+        Chuzhou: "滁州",
+        Fuyang: "阜阳",
+        Suzhou: "宿州",
+        "Lu‘an": "六安",
+        Bozhou: "亳州",
+        Chizhou: "池州",
+        Xuancheng: "宣城",
+
+        // === 山西省 ===
+        Taiyuan: "太原",
+        Datong: "大同",
+        Yangquan: "阳泉",
+        Changzhi: "长治",
+        Jincheng: "晋城",
+        Shuozhou: "朔州",
+        Jinzhong: "晋中",
+        Yuncheng: "运城",
+        Xinzhou: "忻州",
+        Linfen: "临汾",
+        Luliang: "吕梁",
+
+        // === 陕西省 ===
+        "Xi‘an": "西安",
+        Tongchuan: "铜川",
+        Baoji: "宝鸡",
+        Xianyang: "咸阳",
+        Weinan: "渭南",
+        "Yan‘an": "延安",
+        Hanzhong: "汉中",
+        Yulin: "榆林",
+        Ankang: "安康",
+        Shangluo: "商洛",
+
+        // === 甘肃省 ===
+        Lanzhou: "兰州",
+        Jiayuguan: "嘉峪关",
+        Jinchang: "金昌",
+        Baiyin: "白银",
+        Tianshui: "天水",
+        Wuwei: "武威",
+        Zhangye: "张掖",
+        Pingliang: "平凉",
+        Jiuquan: "酒泉",
+        Qingyang: "庆阳",
+        Dingxi: "定西",
+        Longnan: "陇南",
+
+        // === 四川省 ===
+        Chengdu: "成都",
+        Zigong: "自贡",
+        Panzhihua: "攀枝花",
+        Luzhou: "泸州",
+        Deyang: "德阳",
+        Mianyang: "绵阳",
+        Guangyuan: "广元",
+        Suining: "遂宁",
+        Neijiang: "内江",
+        Leshan: "乐山",
+        Nanchong: "南充",
+        Meishan: "眉山",
+        Yibin: "宜宾",
+        Guangan: "广安",
+        Dazhou: "达州",
+        Yaan: "雅安",
+        Bazhong: "巴中",
+        Ziyang: "资阳",
+
+        // === 贵州省 ===
+        Guiyang: "贵阳",
+        Liupanshui: "六盘水",
+        Zunyi: "遵义",
+        Anshun: "安顺",
+        Bijie: "毕节",
+        Tongren: "铜仁",
+
+        // === 云南省 ===
+        Kunming: "昆明",
+        Qujing: "曲靖",
+        Yuxi: "玉溪",
+        Baoshan: "保山",
+        Zhaotong: "昭通",
+        Lijiang: "丽江",
+        "Pu‘er": "普洱",
+        Lincang: "临沧",
+
+        // === 新疆 ===
+        Urumqi: "乌鲁木齐",
+        Karamay: "克拉玛依",
+        Turpan: "吐鲁番",
+        Hami: "哈密",
+        Kashgar: "喀什",
+        Hotan: "和田",
+
+        // === 其他省份/自治区 ===
+        Xining: "西宁",
+        Yinchuan: "银川",
+        Hohhot: "呼和浩特",
+        Baotou: "包头",
+        Wuhai: "乌海",
+        Chifeng: "赤峰",
+        Tongliao: "通辽",
+        Ordos: "鄂尔多斯",
+        Lhasa: "拉萨",
+
+        // === 国外城市 ===
+        London: "伦敦",
+        Paris: "巴黎",
+        Berlin: "柏林",
+        Rome: "罗马",
+        Madrid: "马德里",
+        Lisbon: "里斯本",
+        Amsterdam: "阿姆斯特丹",
+        Brussels: "布鲁塞尔",
+        Vienna: "维也纳",
+        Prague: "布拉格",
+        Budapest: "布达佩斯",
+        Warsaw: "华沙",
+        Moscow: "莫斯科",
+        Stockholm: "斯德哥尔摩",
+        Oslo: "奥斯陆",
+        Helsinki: "赫尔辛基",
+        Copenhagen: "哥本哈根",
+        Dublin: "都柏林",
+        "New York": "纽约",
+        "Los Angeles": "洛杉矶",
+        Chicago: "芝加哥",
+        Houston: "休斯顿",
+        Philadelphia: "费城",
+        "San Francisco": "旧金山",
+        Seattle: "西雅图",
+        Boston: "波士顿",
+        Washington: "华盛顿",
+        Miami: "迈阿密",
+        Toronto: "多伦多",
+        Vancouver: "温哥华",
+        Montreal: "蒙特利尔",
+        Sydney: "悉尼",
+        Melbourne: "墨尔本",
+        Brisbane: "布里斯班",
+        Perth: "珀斯",
+        Auckland: "奥克兰",
+        Tokyo: "东京",
+        Osaka: "大阪",
+        Kyoto: "京都",
+        Yokohama: "横滨",
+        Seoul: "首尔",
+        Busan: "釜山",
+        Singapore: "新加坡",
+        "Kuala Lumpur": "吉隆坡",
+        Bangkok: "曼谷",
+        Jakarta: "雅加达",
+        Mumbai: "孟买",
+        Delhi: "德里",
+        Bangalore: "班加罗尔",
+        Dubai: "迪拜",
+        "Abu Dhabi": "阿布扎比",
+        Istanbul: "伊斯坦布尔",
+        Cairo: "开罗",
+        "Cape Town": "开普敦",
+        Johannesburg: "约翰内斯堡",
+      };
+
+      // ========== 天气描述翻译映射表 ==========
+      const weatherDescMap = {
+        "Partly cloudy": "局部多云",
+        Sunny: "晴朗",
+        Clear: "晴朗",
+        Cloudy: "多云",
+        Overcast: "阴天",
+        "Light Rain": "小雨",
+        "Moderate Rain": "中雨",
+        "Heavy Rain": "大雨",
+        "Light Snow": "小雪",
+        "Heavy Snow": "大雪",
+        Thunderstorm: "雷阵雨",
+        Thunder: "雷暴",
+        Fog: "雾",
+        Mist: "薄雾",
+        Haze: "霾",
+        Showers: "阵雨",
+        Drizzle: "毛毛雨",
+      };
+
+      // 获取元素
+      const cityInput = document.getElementById("cityInput");
+      const searchBtn = document.getElementById("searchBtn");
+      const weatherResult = document.getElementById("weatherResult");
+
+      // 暗色模式按钮文字（覆盖 theme.js 的默认行为）
+      const toggleBtn = document.getElementById("darkModeToggle");
+      if (localStorage.getItem("darkMode") === "enabled") {
+        toggleBtn.innerHTML = "☀️ 亮色模式";
+      } else {
+        toggleBtn.innerHTML = "🌙 暗色模式";
+      }
+
+      // 天气查询函数
+      async function getWeather() {
+        const city = cityInput.value.trim();
+
+        if (city === "") {
+          alert("请输入城市名称！");
+          return;
+        }
+
+        // 显示加载状态
+        weatherResult.innerHTML = `
+          <div class="loading">
+            ⏳ 正在查询 ${city} 的天气...
+          </div>
+        `;
+
+        try {
+          const url = `https://wttr.in/${encodeURIComponent(city)}?format=j1&lang=zh`;
+          const response = await fetch(url);
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          displayWeather(data, city);
+        } catch (error) {
+          console.error("获取天气失败:", error);
+          weatherResult.innerHTML = `
+            <div class="error">
+              ❌ 查询失败，请检查城市名称是否正确<br>
+              提示：试试输入 "北京" 或 "Shanghai"
+            </div>
+          `;
+        }
+      }
+
+      // 显示天气信息
+      function displayWeather(data, city) {
+        try {
+          const current = data.current_condition[0];
+          const location = data.nearest_area[0];
+
+          // 方案三：优先使用用户输入的城市名
+          let cityName = city;
+
+          // 如果用户输入的是英文，尝试翻译
+          if (cityNameMap[cityName]) {
+            cityName = cityNameMap[cityName];
+          }
+
+          // 天气描述翻译
+          let weatherDesc = current.weatherDesc[0]?.value || "未知";
+          if (weatherDescMap[weatherDesc]) {
+            weatherDesc = weatherDescMap[weatherDesc];
+          }
+
+          const country = location.country[0]?.value || "";
+          const temp = current.temp_C;
+          const feelsLike = current.FeelsLikeC;
+          const humidity = current.humidity;
+          const windSpeed = current.windspeedKmph;
+
+          // 根据天气描述选择表情
+          let emoji = "🌤️";
+          if (weatherDesc.includes("晴")) emoji = "☀️";
+          if (weatherDesc.includes("云")) emoji = "☁️";
+          if (weatherDesc.includes("雨")) emoji = "🌧️";
+          if (weatherDesc.includes("雪")) emoji = "❄️";
+          if (weatherDesc.includes("雾") || weatherDesc.includes("霾"))
+            emoji = "🌫️";
+          if (weatherDesc.includes("雷")) emoji = "⛈️";
+
+          weatherResult.innerHTML = `
+            <div class="weather-card">
+              <div class="city-name">
+                ${emoji} ${cityName} ${country ? `(${country})` : ""}
+              </div>
+              <div class="temp">${temp}°C</div>
+              <div>🌡️ 体感温度：${feelsLike}°C</div>
+              <div>${weatherDesc}</div>
+              <hr style="margin: 15px 0;">
+              <div>💧 湿度：${humidity}%</div>
+              <div>💨 风速：${windSpeed} km/h</div>
+            </div>
+          `;
+        } catch (error) {
+          console.error("解析数据失败:", error);
+          weatherResult.innerHTML = `
+            <div class="error">
+              ❌ 数据解析失败，请稍后重试
+            </div>
+          `;
+        }
+      }
+
+      // 绑定事件
+      searchBtn.onclick = getWeather;
+      cityInput.addEventListener("keypress", function (e) {
+        if (e.key === "Enter") {
+          getWeather();
+        }
+      });
+
+      // 页面加载时自动查询默认城市（北京）
+      setTimeout(() => {
+        getWeather();
+      }, 100);
+    </script>
+  </body>
+</html>

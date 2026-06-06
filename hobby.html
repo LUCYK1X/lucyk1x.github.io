@@ -1,578 +1,635 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>我的爱好 - 谛琼霖 | 炫酷生活志</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            min-height: 100vh;
-            transition: background 0.3s;
-        }
+      body {
+        font-family: "Segoe UI", "Poppins", system-ui, sans-serif;
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+        min-height: 100vh;
+        transition: background 0.3s;
+      }
 
-        /* 暗色模式（默认就是深色，但保留切换功能） */
-        body.dark-mode {
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-        }
+      /* 暗色模式（默认就是深色，但保留切换功能） */
+      body.dark-mode {
+        background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      }
 
-        /* 亮色模式 */
-        body:not(.dark-mode) {
-            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
-        }
+      /* 亮色模式 */
+      body:not(.dark-mode) {
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
 
-        /* 导航栏 - 毛玻璃效果 */
-        nav {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50px;
-            padding: 15px 30px;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
+      /* 导航栏 - 毛玻璃效果 */
+      nav {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 50px;
+        padding: 15px 30px;
+        margin-bottom: 40px;
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 25px;
-            transition: all 0.3s;
-        }
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 8px 16px;
+        border-radius: 25px;
+        transition: all 0.3s;
+      }
 
-        body:not(.dark-mode) nav a {
-            color: #2c3e50;
-        }
+      body:not(.dark-mode) nav a {
+        color: #2c3e50;
+      }
 
-        nav a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
+      nav a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
 
-        /* 主标题 */
-        h1 {
-            text-align: center;
-            font-size: 3rem;
-            margin-bottom: 40px;
-            background: linear-gradient(135deg, #fff, #a8c0ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 20px rgba(168,192,255,0.3);
-        }
+      /* 主标题 */
+      h1 {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 40px;
+        background: linear-gradient(135deg, #fff, #a8c0ff);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        text-shadow: 0 0 20px rgba(168, 192, 255, 0.3);
+      }
 
-        body:not(.dark-mode) h1 {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
+      body:not(.dark-mode) h1 {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
 
-        /* 两栏布局 */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
+      /* 两栏布局 */
+      .two-columns {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
 
-        /* 卡片样式 */
-        .card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(10px);
-            border-radius: 25px;
-            padding: 25px;
-            transition: all 0.3s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+      /* 卡片样式 */
+      .card {
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+        border-radius: 25px;
+        padding: 25px;
+        transition: all 0.3s;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
 
-        .card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.12);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
+      .card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.12);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      }
 
-        body:not(.dark-mode) .card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
+      body:not(.dark-mode) .card {
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      }
 
-        .card h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #a8c0ff;
-        }
+      .card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #a8c0ff;
+      }
 
-        body:not(.dark-mode) .card h2 {
-            color: #667eea;
-        }
+      body:not(.dark-mode) .card h2 {
+        color: #667eea;
+      }
 
-        /* 爱好列表 - 网格 */
-        .hobby-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-        }
+      /* 爱好列表 - 网格 */
+      .hobby-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 15px;
+      }
 
-        .hobby-item {
-            background: rgba(255,255,255,0.1);
-            padding: 12px 16px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s;
-        }
+      .hobby-item {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px 16px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        transition: all 0.3s;
+      }
 
-        .hobby-item:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateX(5px);
-        }
+      .hobby-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(5px);
+      }
 
-        .hobby-item i {
-            font-size: 1.5rem;
-            color: #a8c0ff;
-        }
+      .hobby-item i {
+        font-size: 1.5rem;
+        color: #a8c0ff;
+      }
 
-        /* 电影 TOP 3 */
-        .movie-top3 {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+      /* 电影 TOP 3 */
+      .movie-top3 {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
 
-        .movie-card {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            background: rgba(255,255,255,0.1);
-            padding: 12px 18px;
-            border-radius: 15px;
-            transition: all 0.3s;
-        }
+      .movie-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        background: rgba(255, 255, 255, 0.1);
+        padding: 12px 18px;
+        border-radius: 15px;
+        transition: all 0.3s;
+      }
 
-        .movie-rank {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ffd700;
-            min-width: 50px;
-        }
+      .movie-rank {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #ffd700;
+        min-width: 50px;
+      }
 
-        .movie-title {
-            flex: 1;
-            font-size: 1.1rem;
-        }
+      .movie-title {
+        flex: 1;
+        font-size: 1.1rem;
+      }
 
-        /* 进度条 */
-        .progress-section {
-            margin: 20px 0;
-        }
+      /* 进度条 */
+      .progress-section {
+        margin: 20px 0;
+      }
 
-        .progress-item {
-            margin-bottom: 20px;
-        }
+      .progress-item {
+        margin-bottom: 20px;
+      }
 
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
+      .progress-label {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+      }
 
-        .progress-bar {
-            height: 10px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
+      .progress-bar {
+        height: 10px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+      }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #a8c0ff, #3f2b96);
-            border-radius: 10px;
-            width: 0%;
-            transition: width 1s ease;
-        }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, #a8c0ff, #3f2b96);
+        border-radius: 10px;
+        width: 0%;
+        transition: width 1s ease;
+      }
 
-        /* 统计卡片 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-top: 20px;
-        }
+      /* 统计卡片 */
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+        margin-top: 20px;
+      }
 
-        .stat-card {
-            text-align: center;
-            padding: 15px;
-            background: rgba(255,255,255,0.08);
-            border-radius: 15px;
-        }
+      .stat-card {
+        text-align: center;
+        padding: 15px;
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 15px;
+      }
 
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #a8c0ff;
-        }
+      .stat-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #a8c0ff;
+      }
 
-        /* 电影列表 */
-        #movieList {
-            list-style: none;
-            margin-top: 15px;
-        }
+      /* 电影列表 */
+      #movieList {
+        list-style: none;
+        margin-top: 15px;
+      }
 
-        #movieList li {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            background: rgba(255,255,255,0.08);
-            margin-bottom: 8px;
-            border-radius: 12px;
-            transition: all 0.3s;
-        }
+      #movieList li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        background: rgba(255, 255, 255, 0.08);
+        margin-bottom: 8px;
+        border-radius: 12px;
+        transition: all 0.3s;
+      }
 
-        #movieList li:hover {
-            background: rgba(255,255,255,0.15);
-        }
+      #movieList li:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
 
-        .delete-movie {
-            background: rgba(255,255,255,0.2);
-            border: none;
-            color: #ff6b6b;
-            cursor: pointer;
-            padding: 5px 12px;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
+      .delete-movie {
+        background: rgba(255, 255, 255, 0.2);
+        border: none;
+        color: #ff6b6b;
+        cursor: pointer;
+        padding: 5px 12px;
+        border-radius: 8px;
+        transition: all 0.3s;
+      }
 
-        .delete-movie:hover {
-            background: #ff6b6b;
-            color: white;
-        }
+      .delete-movie:hover {
+        background: #ff6b6b;
+        color: white;
+      }
 
-        /* 输入区域 */
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
+      /* 输入区域 */
+      .input-group {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
 
-        .input-group input {
-            flex: 1;
-            padding: 12px 16px;
-            border: none;
-            border-radius: 25px;
-            background: rgba(255,255,255,0.15);
-            color: white;
-            font-size: 1rem;
-        }
+      .input-group input {
+        flex: 1;
+        padding: 12px 16px;
+        border: none;
+        border-radius: 25px;
+        background: rgba(255, 255, 255, 0.15);
+        color: white;
+        font-size: 1rem;
+      }
 
-        .input-group input::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
+      .input-group input::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
 
-        body:not(.dark-mode) .input-group input {
-            background: rgba(0,0,0,0.05);
-            color: #333;
-        }
+      body:not(.dark-mode) .input-group input {
+        background: rgba(0, 0, 0, 0.05);
+        color: #333;
+      }
 
-        .input-group button {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 25px;
-            background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+      .input-group button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 25px;
+        background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+        color: white;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
 
-        .input-group button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(168,192,255,0.4);
-        }
+      .input-group button:hover {
+        transform: scale(1.02);
+        box-shadow: 0 5px 15px rgba(168, 192, 255, 0.4);
+      }
 
-        /* 返回按钮 */
-        .back-link {
-            text-align: center;
-            margin-top: 40px;
-        }
+      /* 返回按钮 */
+      .back-link {
+        text-align: center;
+        margin-top: 40px;
+      }
 
-        .back-link a {
-            display: inline-block;
-            padding: 12px 30px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50px;
-            text-decoration: none;
-            color: white;
-            transition: all 0.3s;
-        }
+      .back-link a {
+        display: inline-block;
+        padding: 12px 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50px;
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s;
+      }
 
-        .back-link a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
+      .back-link a:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+      }
 
-        /* 暗色模式切换按钮 */
-        #darkModeToggle {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #2c3e50;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 12px 20px;
-            cursor: pointer;
-            z-index: 1000;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s;
-            font-weight: bold;
-        }
+      /* 暗色模式切换按钮 */
+      #darkModeToggle {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: #2c3e50;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 12px 20px;
+        cursor: pointer;
+        z-index: 1000;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s;
+        font-weight: bold;
+      }
 
-        #darkModeToggle:hover {
-            background: #1a252f;
-            transform: scale(1.05);
-        }
+      #darkModeToggle:hover {
+        background: #1a252f;
+        transform: scale(1.05);
+      }
 
-        /* 亮色模式的文字颜色覆盖 */
-        body:not(.dark-mode) {
-            color: #2c3e50;
-        }
+      /* 亮色模式的文字颜色覆盖 */
+      body:not(.dark-mode) {
+        color: #2c3e50;
+      }
 
-        body:not(.dark-mode) .hobby-item,
-        body:not(.dark-mode) .movie-card,
-        body:not(.dark-mode) #movieList li {
-            background: rgba(0,0,0,0.05);
-            color: #2c3e50;
-        }
+      body:not(.dark-mode) .hobby-item,
+      body:not(.dark-mode) .movie-card,
+      body:not(.dark-mode) #movieList li {
+        background: rgba(0, 0, 0, 0.05);
+        color: #2c3e50;
+      }
 
-        body:not(.dark-mode) .stat-card {
-            background: rgba(0,0,0,0.03);
-        }
-        /* 当前页高亮 */
-nav a.active {
-    background: rgba(255,255,255,0.25);
-    color: #ffd700 !important;
-    transform: scale(1.05);
-}
+      body:not(.dark-mode) .stat-card {
+        background: rgba(0, 0, 0, 0.03);
+      }
+      /* 当前页高亮 */
+      nav a.active {
+        background: rgba(255, 255, 255, 0.25);
+        color: #ffd700 !important;
+        transform: scale(1.05);
+      }
 
-body:not(.dark-mode) nav a.active {
-    background: rgba(0,0,0,0.1);
-    color: #667eea !important;
-}
+      body:not(.dark-mode) nav a.active {
+        background: rgba(0, 0, 0, 0.1);
+        color: #667eea !important;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <button id="darkModeToggle">🌙 暗色模式</button>
 
-<button id="darkModeToggle">🌙 暗色模式</button>
-
-<div class="container">
-    <nav>
+    <div class="container">
+      <nav>
         <a href="aboutme.html"><i class="fas fa-user"></i> 关于我</a>
-        <a href="hobby.html"class="active"><i class="fas fa-heart"></i> 我的爱好</a>
+        <a href="hobby.html" class="active"
+          ><i class="fas fa-heart"></i> 我的爱好</a
+        >
         <a href="contact.html"><i class="fas fa-envelope"></i> 联系我</a>
         <a href="fruit.html"><i class="fas fa-apple-alt"></i> 水果列表</a>
-        <a href="https://www.freecodecamp.org" target="_blank"><i class="fas fa-laptop-code"></i> 学习资源</a>
-    </nav>
+        <a href="weather.html">天气查询</a>|
+        <a href="https://www.freecodecamp.org" target="_blank"
+          ><i class="fas fa-laptop-code"></i> 学习资源</a
+        >
+      </nav>
 
-    <h1><i class="fas fa-star"></i> 我的精彩生活 <i class="fas fa-star"></i></h1>
+      <h1>
+        <i class="fas fa-star"></i> 我的精彩生活 <i class="fas fa-star"></i>
+      </h1>
 
-    <div class="two-columns">
+      <div class="two-columns">
         <!-- 左侧：爱好 + 技能 -->
         <div class="card">
-            <h2><i class="fas fa-heart"></i> 我的爱好</h2>
-            <div class="hobby-grid">
-                <div class="hobby-item"><i class="fas fa-code"></i> 写代码</div>
-                <div class="hobby-item"><i class="fas fa-film"></i> 看电影</div>
-                <div class="hobby-item"><i class="fas fa-utensils"></i> 吃好吃的</div>
-                <div class="hobby-item"><i class="fas fa-table-tennis"></i> 打羽毛球</div>
-                <div class="hobby-item"><i class="fas fa-gamepad"></i> 玩游戏</div>
-                <div class="hobby-item"><i class="fas fa-running"></i> 跑步</div>
-                <div class="hobby-item"><i class="fas fa-book"></i> 看小说</div>
+          <h2><i class="fas fa-heart"></i> 我的爱好</h2>
+          <div class="hobby-grid">
+            <div class="hobby-item"><i class="fas fa-code"></i> 写代码</div>
+            <div class="hobby-item"><i class="fas fa-film"></i> 看电影</div>
+            <div class="hobby-item">
+              <i class="fas fa-utensils"></i> 吃好吃的
             </div>
+            <div class="hobby-item">
+              <i class="fas fa-table-tennis"></i> 打羽毛球
+            </div>
+            <div class="hobby-item"><i class="fas fa-gamepad"></i> 玩游戏</div>
+            <div class="hobby-item"><i class="fas fa-running"></i> 跑步</div>
+            <div class="hobby-item"><i class="fas fa-book"></i> 看小说</div>
+          </div>
 
-            <h2 style="margin-top: 30px;"><i class="fas fa-chart-line"></i> 我的水平/技能</h2>
-            <div class="progress-section">
-                <div class="progress-item">
-                    <div class="progress-label"><span>🏸 羽毛球水平</span><span>初学者 → 进阶中</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 65%"></div></div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label"><span>💻 代码行数</span><span>5000+ 行</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 40%"></div></div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label"><span>🎮 游戏段位</span><span>黄金 → 铂金</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 55%"></div></div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label"><span>🏃 跑步里程</span><span>累计 200km</span></div>
-                    <div class="progress-bar"><div class="progress-fill" style="width: 35%"></div></div>
-                </div>
+          <h2 style="margin-top: 30px">
+            <i class="fas fa-chart-line"></i> 我的水平/技能
+          </h2>
+          <div class="progress-section">
+            <div class="progress-item">
+              <div class="progress-label">
+                <span>🏸 羽毛球水平</span><span>初学者 → 进阶中</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 65%"></div>
+              </div>
             </div>
+            <div class="progress-item">
+              <div class="progress-label">
+                <span>💻 代码行数</span><span>5000+ 行</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 40%"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-label">
+                <span>🎮 游戏段位</span><span>黄金 → 铂金</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 55%"></div>
+              </div>
+            </div>
+            <div class="progress-item">
+              <div class="progress-label">
+                <span>🏃 跑步里程</span><span>累计 200km</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 35%"></div>
+              </div>
+            </div>
+          </div>
 
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-number" id="hobbyCount">7</div><div>个爱好</div></div>
-                <div class="stat-card"><div class="stat-number" id="movieCount">0</div><div>部电影</div></div>
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="hobbyCount">7</div>
+              <div>个爱好</div>
             </div>
+            <div class="stat-card">
+              <div class="stat-number" id="movieCount">0</div>
+              <div>部电影</div>
+            </div>
+          </div>
         </div>
 
         <!-- 右侧：电影相关 -->
         <div class="card">
-            <h2><i class="fas fa-trophy"></i> 我最喜欢的电影 TOP 3</h2>
-            <div class="movie-top3">
-                <div class="movie-card"><span class="movie-rank">🏆 No.1</span><span class="movie-title">肖申克的救赎</span></div>
-                <div class="movie-card"><span class="movie-rank">🎬 No.2</span><span class="movie-title">盗梦空间</span></div>
-                <div class="movie-card"><span class="movie-rank">📺 No.3</span><span class="movie-title">楚门的世界</span></div>
+          <h2><i class="fas fa-trophy"></i> 我最喜欢的电影 TOP 3</h2>
+          <div class="movie-top3">
+            <div class="movie-card">
+              <span class="movie-rank">🏆 No.1</span
+              ><span class="movie-title">肖申克的救赎</span>
             </div>
-
-            <h2 style="margin-top: 30px;"><i class="fas fa-book-open"></i> 我正在看的小说/书单</h2>
-            <div class="movie-card"><i class="fas fa-book"></i> 《三体》- 刘慈欣 <span style="margin-left: auto;">📖 阅读中 45%</span></div>
-            <div class="movie-card" style="margin-top: 10px;"><i class="fas fa-book"></i> 《JavaScript高级程序设计》- 学习进度 30%</div>
-
-            <h2 style="margin-top: 30px;"><i class="fas fa-list"></i> 我的电影列表</h2>
-            <ul id="movieList"></ul>
-            <div class="input-group">
-                <input type="text" id="movieInput" placeholder="🎬 输入电影名...">
-                <button id="addBtn"><i class="fas fa-plus"></i> 添加电影</button>
+            <div class="movie-card">
+              <span class="movie-rank">🎬 No.2</span
+              ><span class="movie-title">盗梦空间</span>
             </div>
+            <div class="movie-card">
+              <span class="movie-rank">📺 No.3</span
+              ><span class="movie-title">楚门的世界</span>
+            </div>
+          </div>
+
+          <h2 style="margin-top: 30px">
+            <i class="fas fa-book-open"></i> 我正在看的小说/书单
+          </h2>
+          <div class="movie-card">
+            <i class="fas fa-book"></i> 《三体》- 刘慈欣
+            <span style="margin-left: auto">📖 阅读中 45%</span>
+          </div>
+          <div class="movie-card" style="margin-top: 10px">
+            <i class="fas fa-book"></i> 《JavaScript高级程序设计》- 学习进度 30%
+          </div>
+
+          <h2 style="margin-top: 30px">
+            <i class="fas fa-list"></i> 我的电影列表
+          </h2>
+          <ul id="movieList"></ul>
+          <div class="input-group">
+            <input type="text" id="movieInput" placeholder="🎬 输入电影名..." />
+            <button id="addBtn"><i class="fas fa-plus"></i> 添加电影</button>
+          </div>
         </div>
-    </div>
+      </div>
 
-    <div class="back-link">
+      <div class="back-link">
         <a href="aboutme.html"><i class="fas fa-arrow-left"></i> 返回关于我</a>
+      </div>
     </div>
-</div>
 
-<script>
-    // 暗色模式功能
-    const toggleBtn = document.getElementById('darkModeToggle');
-    
-    if (localStorage.getItem('darkMode') === 'enabled') {
-        document.body.classList.add('dark-mode');
+    <script>
+      // 暗色模式功能
+      const toggleBtn = document.getElementById("darkModeToggle");
+
+      if (localStorage.getItem("darkMode") === "enabled") {
+        document.body.classList.add("dark-mode");
         toggleBtn.innerHTML = '<i class="fas fa-sun"></i> 亮色模式';
-    } else {
-        document.body.classList.remove('dark-mode');
+      } else {
+        document.body.classList.remove("dark-mode");
         toggleBtn.innerHTML = '<i class="fas fa-moon"></i> 暗色模式';
-    }
-    
-    toggleBtn.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        
-        if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('darkMode', 'enabled');
-            toggleBtn.innerHTML = '<i class="fas fa-sun"></i> 亮色模式';
+      }
+
+      toggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+          localStorage.setItem("darkMode", "enabled");
+          toggleBtn.innerHTML = '<i class="fas fa-sun"></i> 亮色模式';
         } else {
-            localStorage.setItem('darkMode', 'disabled');
-            toggleBtn.innerHTML = '<i class="fas fa-moon"></i> 暗色模式';
+          localStorage.setItem("darkMode", "disabled");
+          toggleBtn.innerHTML = '<i class="fas fa-moon"></i> 暗色模式';
         }
-    });
+      });
 
-    // ========== 电影列表完整功能 ==========
-    let movies = [];
+      // ========== 电影列表完整功能 ==========
+      let movies = [];
 
-    // 加载 localStorage
-    function loadMovies() {
+      // 加载 localStorage
+      function loadMovies() {
         const saved = localStorage.getItem("myMovies");
         if (saved) {
-            movies = JSON.parse(saved);
+          movies = JSON.parse(saved);
         } else {
-            movies = ["盗梦空间", "星际穿越", "阿凡达"];
+          movies = ["盗梦空间", "星际穿越", "阿凡达"];
         }
         renderMovieList();
         updateMovieCount();
-    }
+      }
 
-    // 保存到 localStorage
-    function saveMovies() {
+      // 保存到 localStorage
+      function saveMovies() {
         localStorage.setItem("myMovies", JSON.stringify(movies));
         updateMovieCount();
-    }
+      }
 
-    // 渲染电影列表
-    function renderMovieList() {
+      // 渲染电影列表
+      function renderMovieList() {
         const movieListUl = document.getElementById("movieList");
         movieListUl.innerHTML = "";
-        
+
         if (movies.length === 0) {
-            movieListUl.innerHTML = '<li style="text-align:center; opacity:0.7;">暂无电影，添加一部吧～</li>';
-            return;
+          movieListUl.innerHTML =
+            '<li style="text-align:center; opacity:0.7;">暂无电影，添加一部吧～</li>';
+          return;
         }
-        
+
         for (let i = 0; i < movies.length; i++) {
-            const li = document.createElement("li");
-            li.innerHTML = `
+          const li = document.createElement("li");
+          li.innerHTML = `
                 <span><i class="fas fa-film"></i> ${movies[i]}</span>
                 <button class="delete-movie" data-index="${i}"><i class="fas fa-trash"></i> 删除</button>
             `;
-            movieListUl.appendChild(li);
+          movieListUl.appendChild(li);
         }
-        
-        // 绑定删除事件
-        document.querySelectorAll(".delete-movie").forEach(btn => {
-            btn.addEventListener("click", function() {
-                const index = parseInt(this.getAttribute("data-index"));
-                movies.splice(index, 1);
-                saveMovies();
-                renderMovieList();
-            });
-        });
-    }
 
-    // 更新电影数量统计
-    function updateMovieCount() {
+        // 绑定删除事件
+        document.querySelectorAll(".delete-movie").forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const index = parseInt(this.getAttribute("data-index"));
+            movies.splice(index, 1);
+            saveMovies();
+            renderMovieList();
+          });
+        });
+      }
+
+      // 更新电影数量统计
+      function updateMovieCount() {
         const movieCountSpan = document.getElementById("movieCount");
         if (movieCountSpan) {
-            movieCountSpan.textContent = movies.length;
+          movieCountSpan.textContent = movies.length;
         }
-    }
+      }
 
-    // 添加电影
-    function addMovie() {
+      // 添加电影
+      function addMovie() {
         const input = document.getElementById("movieInput");
         const movieName = input.value.trim();
-        
+
         if (movieName === "") {
-            alert("请输入电影名称！");
-            return;
+          alert("请输入电影名称！");
+          return;
         }
-        
+
         movies.push(movieName);
         saveMovies();
         renderMovieList();
         input.value = "";
-    }
+      }
 
-    // 绑定事件
-    document.getElementById("addBtn").addEventListener("click", addMovie);
-    document.getElementById("movieInput").addEventListener("keypress", function(e) {
-        if (e.key === "Enter") addMovie();
-    });
+      // 绑定事件
+      document.getElementById("addBtn").addEventListener("click", addMovie);
+      document
+        .getElementById("movieInput")
+        .addEventListener("keypress", function (e) {
+          if (e.key === "Enter") addMovie();
+        });
 
-    // 初始化
-    loadMovies();
-</script>
-
-</body>
+      // 初始化
+      loadMovies();
+    </script>
+  </body>
 </html>
